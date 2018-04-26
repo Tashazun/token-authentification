@@ -2,7 +2,7 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 
-describe('Film E2E Test', () => {
+describe.skip('Film E2E Test', () => {
 
     before(() => dropCollection('films'));
     before(() => dropCollection('studios'));
