@@ -56,11 +56,11 @@ describe('Actor E2E Test', () => {
     
     it('gets an actor by id', () => {
         let film1 = {
-            title: 'Scott Pilgrim Vs. the World',
+            title: 'A Quiet Place',
             studio: studio1._id,
-            released: 2010,
+            released: 2018,
             cast: [{
-                role: 'supporting role',
+                role: 'grizzled farm dad',
                 actor: actor1._id
             }]
         };
@@ -116,10 +116,21 @@ describe('Actor E2E Test', () => {
                 assert.deepEqual(body.name, actor1.name);
             });
     });
-    it('removes an actor', () => {
+
+    it('returns 400 on attempt to delete actor with saved films', () => {
         return request.delete(`/actors/${actor1._id}`)
+            .then(response => {
+                assert.equal(response.status, 400);
+                assert.match(response.body.error, /^Cannot delete/);
+            });      
+    });
+
+
+    it('removes a actor by id', () => {
+        return request.delete(`/actors/${actor2._id}`)
+            .then(checkOk)
             .then(() => {
-                return request.get(`/actors/${actor1._id}`);
+                return request.get(`/studios/${actor2._id}`);
             })
             .then(res => {
                 assert.equal(res.status, 404);

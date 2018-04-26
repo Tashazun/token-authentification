@@ -16,7 +16,8 @@
     "test:e2e": "mocha test/e2e",
     "test:watch": "nodemon --exec 'npm run test:mocha'",
     "test:e2e:watch": "nodemon --exec 'npm run test:e2e'",
-    "test:unit:watch": "nodemon --exec 'npm run test:unit'"
+    "test:unit:watch": "nodemon --exec 'npm run test:unit'",
+    "start:watch": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -29,8 +30,10 @@
   },
   "homepage": "https://github.com/J3ffcon1/ripe-banana",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.0.15",
     "morgan": "^1.9.0"
   },

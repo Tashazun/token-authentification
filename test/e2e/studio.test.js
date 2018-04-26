@@ -111,12 +111,21 @@ describe('Studio E2E Test', () => {
                 assert.deepEqual(body.address.city, studio1.address.city);
             });
     });
+    
+    it('returns 400 on attempt to delete studio with films', () => {
+        return request.delete(`/studios/${studio2._id}`)
+            .then(response => {
+                assert.equal(response.status, 400);
+                assert.match(response.body.error, /^Cannot delete/);
+            });      
+    });
+
 
     it('removes a studio by id', () => {
-        return request.delete(`/studios/${studio2._id}`)
+        return request.delete(`/studios/${studio1._id}`)
             .then(checkOk)
             .then(() => {
-                return request.get(`/studios/${studio2._id}`);
+                return request.get(`/studios/${studio1._id}`);
             })
             .then(res => {
                 assert.equal(res.status, 404);
